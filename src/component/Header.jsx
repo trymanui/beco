@@ -103,6 +103,7 @@ function Header() {
     focus:ring-1
     placeholder:text-base
     placeholder-gray-400
+    focus:border-green-700
   "
 />
 
