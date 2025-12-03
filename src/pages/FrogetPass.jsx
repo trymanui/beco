@@ -1,6 +1,9 @@
 import React,{ useState } from 'react';
 import { Link } from 'react-router';
 import OAuth from '../component/OAuth';
+import { toast } from 'react-toastify';
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth';
+import 'react-toastify/dist/ReactToastify.css'
 
 
 function FrogetPass() {
@@ -14,6 +17,16 @@ function onchange(e){
   setEmail(e.target.value)
   }
 
+  async function onSubmit(e) {
+    e.preventDefault();
+    try {
+      const auth=getAuth();
+      await sendPasswordResetEmail(auth,email);
+      toast.success("Email was sent");
+    } catch (error) {
+      toast.error("not registered email please register");
+    }
+  }
   return (
       <section>
     
@@ -22,7 +35,7 @@ function onchange(e){
           <div className='md:w-[47%] lg:w-[50%] -mb-12 md:-mb-12'>
             <img src="https://thumbs.dreamstime.com/b/eco-green-vector-friendly-icon-recycle-logo-packaging-renewable-symbol-environmentally-sign-house-comfort-building-business-bio-158041091.jpg" className='w-full py-0 -mt-12 mb-0 mix-blend-multiply' /></div>
       <div className='w-full md:w-[67%] lg:w-[40%] lg:ml-2'>
-        <form className='w-full'>
+        <form onSubmit={onSubmit} className='w-full relative z-10'>
           <input type="email" className='w-full px-4 py-4 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-2' id='email' value={email} onChange={onchange}
           placeholder='Email address'  />
           

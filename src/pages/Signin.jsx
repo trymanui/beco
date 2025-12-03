@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../component/OAuth';
+import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css'
 
 function Signin() {
 
   const [showPassword,setShowPassword]=useState(false);
-
+const navigate=useNavigate();
   const [formData,setFormData]=useState({
     email:"",
     password:"",
@@ -18,6 +21,21 @@ function onchange(e){
     ...prev,[e.target.id]:e.target.value,
   }))
 }
+
+async function onSubmit(e){
+  e.preventDefault();
+  try {
+    const auth=getAuth();
+    const userCredentials=await signInWithEmailAndPassword(auth,email,password);
+    if(userCredentials.user){
+      navigate("/home")
+    }
+
+  } catch (error) {
+    toast.error("Bad user credentials");
+
+  }
+}
   return (
    <section>
 
@@ -26,7 +44,7 @@ function onchange(e){
       <div className='md:w-[47%] lg:w-[50%] -mb-12 md:-mb-12'>
         <img src="https://thumbs.dreamstime.com/b/eco-green-vector-friendly-icon-recycle-logo-packaging-renewable-symbol-environmentally-sign-house-comfort-building-business-bio-158041091.jpg" className='w-full py-0 -mt-12 -mb-2 mix-blend-multiply' /></div>
   <div className='w-full md:w-[67%] lg:w-[40%] lg:ml-2'>
-    <form className='w-full'>
+    <form onSubmit={onSubmit} className='w-full relative z-10'>
       <input type="email" className='w-full px-4 py-4 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-1' id='email' value={email} onChange={onchange}
       placeholder='Email address'  />
       <div className='relative mb-2'>

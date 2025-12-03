@@ -1,6 +1,12 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router';
 import OAuth from '../component/OAuth';
+import {getAuth,createUserWithEmailAndPassword, updateProfile} from 'firebase/auth';
+import { db } from '../firebase';
+import { serverTimestamp, setDoc,doc } from 'firebase/firestore';
+import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+
 
 function SignUp() {
    const [showPassword,setShowPassword]=useState(false);
@@ -11,13 +17,34 @@ function SignUp() {
       password:"",
     })
   const {name,email,password}=formData;
-  
+  const navigate=useNavigate()
   
   function onchange(e){
     setFormData((prev)=>({
       ...prev,[e.target.id]:e.target.value,
     }))
   }
+async function onSubmit(e){
+e.preventDefault();
+try {
+  const auth=getAuth();
+  const userCredentials=await createUserWithEmailAndPassword(auth,email,password);
+  updateProfile(auth.currentUser,{
+    displayName:name
+  })
+  const user=userCredentials.user;
+  const formDataCopy={...formData};
+  delete formDataCopy.password;
+  formDataCopy.timestamp=serverTimestamp();
+
+  await setDoc(doc(db,'users',user.uid), formDataCopy);
+  navigate('/home');
+} catch (error) {
+  console.log(error);
+  toast.error('something went wrong')
+}
+}
+
   return (
     <section>
    
@@ -26,7 +53,7 @@ function SignUp() {
          <div className='md:w-[47%] lg:w-[50%] -mb-12 md:-mb-12'>
            <img src="https://thumbs.dreamstime.com/b/eco-green-vector-friendly-icon-recycle-logo-packaging-renewable-symbol-environmentally-sign-house-comfort-building-business-bio-158041091.jpg" className='w-full py-0 -mt-12 -mb-2 mix-blend-multiply' /></div>
      <div>
-       <form className='w-full md:w-[67%] lg:w-[40%] lg:ml-20'> 
+       <form cla onSubmit={onSubmit} className='w-full md:w-[67%] lg:w-[40%] lg:ml-20 relative z-10'> 
        <input type="text" className='w-full px-4 py-4 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-1' id='name' value={name} onChange={onchange}
          placeholder='Full Name'/>
 
