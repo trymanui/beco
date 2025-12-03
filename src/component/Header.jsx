@@ -63,7 +63,7 @@ function Header() {
             }}
           >
             <div className="w-11 h-11 bg-white rounded-full shadow flex items-center justify-center">
-              <Link to="/profile">
+              <Link to="/profiles">
               <i className="fa-solid fa-user text-gray-800 text-2xl"></i>
               </Link>
             </div>

@@ -39,6 +39,7 @@ function App() {
   <Route path="/forgot" element={<ForgetPass />}/>
   <Route path="/short" element={<Short />}/>
   <Route path="/profile" element={<Profile />}/>
+    <Route path="/profiles" element={user ? <Navigate  to="/profile" /> : <SignUp />} />
   <Route path="/own" element={<Own />}/>
  </Routes>
  </BrowserRouter>
