@@ -11,6 +11,7 @@ import { ToastContainer } from "react-toastify";
 
 import { getAuth,onAuthStateChanged  } from "firebase/auth";
 import { Navigate } from "react-router-dom";
+import Spinner from "./component/Spinner";
 
 function App() {
 
@@ -27,7 +28,7 @@ function App() {
     return () => unsubscribe();
   }, []);
 
- if (loading) return null; 
+ if (loading) return <Spinner />; 
   return (
     <>
  <BrowserRouter>
