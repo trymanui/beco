@@ -74,7 +74,7 @@ function BottomNav() {
         </NavLink>
 
         {/* SHORTS */}
-        <NavLink to="/short" className="flex flex-col items-center text-sm">
+        <NavLink to="/short" state={{autoSound:true}} className="flex flex-col items-center text-sm">
           {({ isActive }) => (
             <>
               <i
