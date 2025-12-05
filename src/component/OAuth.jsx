@@ -24,6 +24,7 @@ const navigate = useNavigate();
       name:user.displayName,
       email:user.email,
       timestamp: serverTimestamp(),
+      coins:100
     });
   }
  navigate("/home");

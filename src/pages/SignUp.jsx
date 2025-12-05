@@ -16,7 +16,7 @@ function SignUp() {
       email:"",
       password:"",
     })
-  const {name,email,password}=formData;
+  const {name,email,password,reward}=formData;
   const navigate=useNavigate()
   
   function onchange(e){
@@ -36,6 +36,7 @@ try {
   const formDataCopy={...formData};
   delete formDataCopy.password;
   formDataCopy.timestamp=serverTimestamp();
+  formDataCopy.reward=100;
 
   await setDoc(doc(db,'users',user.uid), formDataCopy);
   navigate('/home');
@@ -51,7 +52,7 @@ try {
        <h1 className="text-3xl text-center mt-6 font-bold -mb-6">Sign Up</h1>
        <div className='flex justify-center flex-wrap items-center px-6 py-1 max-w-6xl mx-auto'>
          <div className='md:w-[47%] lg:w-[50%] -mb-12 md:-mb-12'>
-           <img src="https://thumbs.dreamstime.com/b/eco-green-vector-friendly-icon-recycle-logo-packaging-renewable-symbol-environmentally-sign-house-comfort-building-business-bio-158041091.jpg" className='w-full py-0 -mt-12 -mb-2 mix-blend-multiply' /></div>
+           <img src="https://thumbs.dreamstime.com/b/eco-green-vector-friendly-icon-recycle-logo-packaging-renewable-symbol-environmentally-sign-house-comfort-building-business-bio-158041091.jpg" className='w-full py-0 -mt-12 -mb-2 mix-blend-multiply' alt='signup' /></div>
      <div>
        <form cla onSubmit={onSubmit} className='w-full md:w-[67%] lg:w-[40%] lg:ml-20 relative z-10'> 
        <input type="text" className='w-full px-4 py-4 text-xl text-gray-700 bg-white border-gray-300 rounded transition ease-in-out mb-1' id='name' value={name} onChange={onchange}

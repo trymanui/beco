@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router';
 import {getAuth, updateProfile} from 'firebase/auth'
 import { toast } from 'react-toastify';
 import { db } from '../firebase';
-import { updateDoc,doc } from 'firebase/firestore';
-
+import { updateDoc,doc, collection, query, where,  getDocs } from 'firebase/firestore';
+import ListingItem from '../component/ListingItem';
 
 function Profile() {
   const auth=getAuth();
-  const [changeDetail,setChangeDetail]=useState(false)
+  const [changeDetail,setChangeDetail]=useState(false);
+  const [listings,setListings]=useState(null);
+  const [loading,setLoading]=useState(true);
   const [formData,setFormData] = useState({
     name: auth.currentUser.displayName,
     email: auth.currentUser.email
@@ -40,6 +42,25 @@ await updateDoc(docRef,{name,
     toast.error("Could not update the profile details")
   }
 }
+
+useEffect(()=>{
+
+async function fetchUserListings(){
+const listingRef=collection(db,"listings");
+const q=query (listingRef, where('userRef',"==",auth.currentUser.uid));
+const querySnap=await getDocs(q)
+let listings=[];
+querySnap.forEach((doc)=>{
+  return listings.push({
+    id:doc.id,
+    data:doc.data()
+  });
+});
+setListings(listings);
+setLoading(false);
+}
+fetchUserListings();
+},[auth.currentUser.uid])
   return (
     <>
       {/* HEADER */}
@@ -99,6 +120,24 @@ await updateDoc(docRef,{name,
           </form>
         </div>
 
+      </div>
+         <div className="max-w-6xl px-2 mt-4 mx-auto mb-12">
+        {!loading && listings.length > 0 && (
+          <>
+            <h2 className="text-xl text-center font-semibold mb-4">
+              My Listings
+            </h2>
+            <ul className="grid grid-cols-2 gap-y-3 gap-x-2 ">
+              {listings.map((listing) => (
+                <ListingItem
+                  key={listing.id}
+                  id={listing.id}
+                  listing={listing.data}
+                />
+              ))}
+            </ul>
+          </>
+        )}
       </div>
     </>
   );

@@ -11,22 +11,21 @@ export default function Short() {
 
   const reels = [
     { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/English-1.mp4", lang: "English" },
-     { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/English-2.mp4", lang: "English" },
-      { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/English-3.mp4", lang: "English" },
-       { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/English-4.mp4", lang: "English" },
-        { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/English-5.mp4", lang: "English" },
-    { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/Hindi-1.mp4", lang: "Hindi" },
-    { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/Hindi-2.mp4", lang: "Hindi" },
-    { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/Hindi-3.mp4", lang: "Hindi" },
-    { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/Hindi-4.mp4", lang: "Hindi" },
-    { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/Hindi-5.mp4", lang: "Hindi" },
-{ url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/Telugu-1.mp4", lang: "Telugu" },
+     { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764837932/English-2_no6vck.mp4", lang: "English" },
+      { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764837942/English-3_g6xuqh.mp4", lang: "English" },
+       { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764837942/English-4_np5tig.mp4", lang: "English" },
+        { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764837895/English-5_cw2rlu.mp4", lang: "English" },
+    { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764837942/Hindi-1_eiwxfa.mp4", lang: "Hindi" },
+    { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764837630/Hindi-2_ljqgwf.mp4", lang: "Hindi" },
+    { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764837635/Hindi-3_wt8lz6.mp4", lang: "Hindi" },
+    { url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764837705/Hindi-4_y8nyvx.mp4", lang: "Hindi" },
+{ url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764837642/Telugu-1_s2oq9u.mp4", lang: "Telugu" },
   
-{ url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/Telugu-2.mp4", lang: "Telugu" },
+{ url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764837901/Telugu-2_ue6tom.mp4", lang: "Telugu" },
 
-{ url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/Telugu-3.mp4", lang: "Telugu" },
-{ url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/Telugu-4.mp4", lang: "Telugu" },
-{ url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764830084/Telugu-5.mp4", lang: "Telugu" },
+{ url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764837775/Telugu-3_wraoiu.mp4", lang: "Telugu" },
+{ url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764838680/Telugu-4_oizpu3.mp4", lang: "Telugu" },
+{ url: "https://res.cloudinary.com/dllrfmjff/video/upload/v1764838656/Telugu-5_tyf7uq.mp4", lang: "Telugu" },
   ];
 
   const filtered = reels.filter((v) => v.lang === lang);
@@ -118,6 +117,7 @@ export default function Short() {
         onTouchEnd={onTouchEnd}
       >
         <video
+          key={`${lang}-${index}`}
           ref={videoRef}
           className="w-full h-full object-cover"
           autoPlay
