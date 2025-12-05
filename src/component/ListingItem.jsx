@@ -48,16 +48,16 @@ export default function ListingItem({ listing, id, onEdit, onDelete }) {
 </div>
         {/* Edit Button */}
       <div className="mr-2">
-          <button onClick={() => onEdit(id)} className="text-[#0B6E4F] mx-3">
+             {onEdit && ( <span onClick={() => onEdit(listing.id)} className="text-[#0B6E4F] mx-3">
             <i className="fa-solid fa-pencil text-lg"></i>
-          </button>
+          </span>)}
 
 
         {/* Delete Button */}
-       
-          <button onClick={() => onDelete(id)} className="text-red-600">
+         {onDelete && (
+          <span onClick={() => onDelete(listing.id)} className="text-red-600">
             <i className="fa-solid fa-trash text-lg"></i>
-          </button>
+          </span>)}
   </div>
       </div>
     </li>

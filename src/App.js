@@ -12,6 +12,7 @@ import { ToastContainer } from "react-toastify";
 import { getAuth,onAuthStateChanged  } from "firebase/auth";
 import { Navigate } from "react-router-dom";
 import Spinner from "./component/Spinner";
+import EditListing from "./pages/EditListing";
 
 function App() {
 
@@ -42,6 +43,7 @@ function App() {
   <Route path="/profile" element={<Profile />}/>
     <Route path="/profiles" element={user ? <Navigate  to="/profile" /> : <SignUp />} />
   <Route path="/own" element={<Own />}/>
+  <Route path="/edit-listing/:listingId" element={<EditListing />}/>
  </Routes>
  </BrowserRouter>
  <ToastContainer 
