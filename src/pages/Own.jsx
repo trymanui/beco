@@ -16,7 +16,7 @@ function Own() {
     name:"",
     images:[],
     category:"",
-    coins:0,
+    coins:"",
     phone:"",
     address:"",
     description:""
