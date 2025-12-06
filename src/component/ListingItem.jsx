@@ -5,7 +5,8 @@ export default function ListingItem({ listing, id, onEdit, onDelete }) {
     <li className="relative bg-white flex flex-col shadow-md hover:shadow-xl rounded-md overflow-hidden transition-shadow duration-150">
 
       {/* CLICKABLE SECTION */}
-      <Link to={`/category/${listing.category}/${id}`}>
+     <Link to={`/listing/${listing.category}/${id}`}>
+
         <div className="h-[200px] w-full overflow-hidden mb-2">
           <img
             className="h-full w-full object-cover hover:scale-105 transition duration-200"

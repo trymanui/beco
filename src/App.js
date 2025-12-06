@@ -13,6 +13,7 @@ import { getAuth,onAuthStateChanged  } from "firebase/auth";
 import { Navigate } from "react-router-dom";
 import Spinner from "./component/Spinner";
 import EditListing from "./pages/EditListing";
+import Listing from "./pages/Listing";
 
 function App() {
 
@@ -44,6 +45,7 @@ function App() {
     <Route path="/profiles" element={user ? <Navigate  to="/profile" /> : <SignUp />} />
   <Route path="/own" element={<Own />}/>
   <Route path="/edit-listing/:listingId" element={<EditListing />}/>
+    <Route path="/listing/:categoryName/:listingId" element={<Listing />}/>
  </Routes>
  </BrowserRouter>
  <ToastContainer 
